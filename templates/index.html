@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBP to JPG/PNG Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">WEBP to JPG/PNG Converter</h1>
+        <form id="uploadForm" method="post" enctype="multipart/form-data" class="text-center mt-4">
+            <div class="mb-3">
+                <input type="file" name="webp_file" class="form-control" accept=".webp" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+            <div class="spinner-border text-primary mt-3" role="status" id="loadingSpinner">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </form>
+
+        {% if jpg_path and png_path %}
+            <div class="mt-5 text-center">
+                <h3>Download Converted Files</h3>
+                <a href="{{ url_for('download', filename=jpg_path) }}" class="btn btn-success mt-2">Download JPG</a>
+                <a href="{{ url_for('download', filename=png_path) }}" class="btn btn-success mt-2">Download PNG</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const spinner = document.getElementById('loadingSpinner');
+
+        form.addEventListener('submit', function () {
+            spinner.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
