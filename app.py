@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, send_file, redirect, url_for
 from PIL import Image
+import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images'
@@ -54,4 +55,5 @@ def download(filename):
     return send_file(filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
